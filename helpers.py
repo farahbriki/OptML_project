@@ -61,30 +61,6 @@ def load_dataset(
     return train_loader, test_loader
 
 
-# Define the transformations for the ImageNet, MNIST dataset #TODO: move to notebook
-imagenet_train_transform = transforms.Compose(
-    [
-        transforms.RandomResizedCrop(224),
-        transforms.RandomHorizontalFlip(),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-    ]
-)
-
-imagenet_test_transform = transforms.Compose(
-    [
-        transforms.Resize(256),
-        transforms.CenterCrop(224),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-    ]
-)
-
-mnist_transform = transforms.Compose(
-    [transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))]
-)
-
-
 def imshow(img):
     img = img / 2 + 0.5  # unnormalize
     npimg = img.numpy()
