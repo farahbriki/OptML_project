@@ -13,5 +13,8 @@ AdaMax:
 NAdam:
   learning_rate: 0.001
   betas: (0.9, 0.999)
-AdaGrade:
+AdaGrad:
   learning_rate: 0.001
+RMSProp:
+  learning_rate: 0.001
+  alpha: 0.99
