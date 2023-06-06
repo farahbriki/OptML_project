@@ -1,5 +1,7 @@
 SGD:
   learning_rate: 0.01
+SGD_Momentum:
+  learning_rate: 0.01
   momentum: 0.9
 AdaDelta:
   learning_rate: 0.001
