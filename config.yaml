@@ -1,0 +1,17 @@
+SGD:
+  learning_rate: 0.01
+  momentum: 0.9
+AdaDelta:
+  learning_rate: 0.001
+  decay: 0.95
+Adam:
+  learning_rate: 0.001
+  betas: (0.9, 0.999)
+AdaMax:
+  learning_rate: 0.001
+  betas: (0.9, 0.999)
+NAdam:
+  learning_rate: 0.001
+  betas: (0.9, 0.999)
+AdaGrade:
+  learning_rate: 0.001
