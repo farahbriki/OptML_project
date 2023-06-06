@@ -37,6 +37,7 @@ def load_dataset(
         test_set = ImageNet(
             root=path, split="val", download=True, transform=test_transform
         )
+
     elif dataset_name == "MNIST":
         train_set = MNIST(
             root=path, train=True, download=True, transform=train_transform
@@ -44,6 +45,7 @@ def load_dataset(
         test_set = MNIST(
             root=path, train=False, download=True, transform=test_transform
         )
+        
     else:
         raise ValueError(
             "Unsupported dataset: {}. Only CIFAR10, ImageNet or MNIST are supported.".format(
