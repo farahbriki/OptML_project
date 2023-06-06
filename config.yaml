@@ -8,13 +8,13 @@ AdaDelta:
   decay: 0.95
 Adam:
   learning_rate: 0.001
-  betas: (0.9, 0.999)
+  betas: [0.9, 0.999]
 AdaMax:
   learning_rate: 0.001
-  betas: (0.9, 0.999)
+  betas: [0.9, 0.999]
 NAdam:
   learning_rate: 0.001
-  betas: (0.9, 0.999)
+  betas: [0.9, 0.999]
 AdaGrad:
   learning_rate: 0.001
 RMSProp:

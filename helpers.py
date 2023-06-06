@@ -81,8 +81,8 @@ def load_dataset(dataset_name, batch_size, num_workers=2):
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    train_set = train_set.to(device)
-    test_set = test_set.to(device)
+    #train_set = train_set.to(device)
+    #test_set = test_set.to(device)
 
     num_workers = 0 if device.type == "cuda" else num_workers
 
@@ -101,10 +101,13 @@ def load_dataset(dataset_name, batch_size, num_workers=2):
         pin_memory=True,
     )
 
-    train_loader = train_loader.to(device)
-    test_loader = test_loader.to(device)
+    #train_loader = train_loader.to(device)
+    #test_loader = test_loader.to(device)
     num_classes = len(train_set.classes)
-    num_channels = train_set.data.shape[3]
+    if dataset_name == "MNIST":
+        num_channels = 1
+    else:
+        num_channels = train_set.data.shape[3]
     image_size = train_set.data.shape[1]
     return train_loader, test_loader, num_classes, num_channels, image_size, device
 

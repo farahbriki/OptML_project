@@ -27,7 +27,7 @@ class CNN1(nn.Module):
 
 
 class LeNet5(nn.Module):
-    def __init__(self, device, in_channels=1):
+    def __init__(self, device, dataset_name="CIFAR10", in_channels=1):
         super(LeNet5, self).__init__()
 
         self.device = device
@@ -41,8 +41,13 @@ class LeNet5(nn.Module):
             nn.AvgPool2d(kernel_size=2, stride=2),
         )
 
+        if dataset_name == 'MNIST':
+            linear_input_size = 16 * 4 * 4
+        elif dataset_name == 'CIFAR10':
+            linear_input_size = 16 * 5 * 5
+
         self.classifier = nn.Sequential(
-            nn.Linear(16 * 5 * 5, 120).to(device),
+            nn.Linear(linear_input_size, 120).to(device),
             nn.ReLU(),
             nn.Linear(120, 84).to(device),
             nn.ReLU(),
@@ -296,28 +301,30 @@ class VGGNet(nn.Module):
                 in_channels_ = v
 
         return nn.Sequential(*layers)
-
+    
 
 class LeNetPlusPlus(nn.Module):
-    def __init__(self, device, in_channels=3, num_classes=10):
+    def __init__(self, device, in_channels=1, num_classes=10):
         super(LeNetPlusPlus, self).__init__()
 
         self.device = device
 
-        self.features = (
-            nn.Sequential(  # TODO: ensure input is grayscale 32x32 or modularize
-                nn.Conv2d(in_channels, 6, kernel_size=5, stride=1).to(device),
-                nn.ReLU(inplace=True),
-                nn.MaxPool2d(kernel_size=2, stride=2),
-                nn.Conv2d(6, 16, kernel_size=5, stride=1).to(device),
-                nn.ReLU(inplace=True),
-                nn.MaxPool2d(kernel_size=2, stride=2),
-                nn.Conv2d(16, 120, kernel_size=5, stride=1).to(device),
-                nn.ReLU(inplace=True),
-            )
+        self.features = nn.Sequential(
+            nn.Conv2d(in_channels, 16, kernel_size=3, stride=1).to(device),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(16, 16, kernel_size=3, stride=1).to(device),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(kernel_size=2, stride=2),
+            nn.Conv2d(16, 32, kernel_size=3, stride=1).to(device),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(32, 32, kernel_size=3, stride=1).to(device),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(kernel_size=2, stride=2),
         )
 
         self.classifier = nn.Sequential(
+            nn.Linear(32 * 4 * 4, 120).to(device),
+            nn.ReLU(inplace=True),
             nn.Linear(120, 84).to(device),
             nn.ReLU(inplace=True),
             nn.Linear(84, num_classes).to(device),
@@ -329,6 +336,7 @@ class LeNetPlusPlus(nn.Module):
         x = x.view(x.size(0), -1)
         x = self.classifier(x)
         return x
+
 
 
 class MiniVGG(nn.Module):
@@ -347,7 +355,7 @@ class MiniVGG(nn.Module):
         )
 
         self.classifier = nn.Sequential(
-            nn.Linear(64 * 8 * 8, 256).to(device),
+            nn.Linear(64 * 7 * 7, 256).to(device),
             nn.ReLU(inplace=True),
             nn.Linear(256, 128).to(device),
             nn.ReLU(inplace=True),
