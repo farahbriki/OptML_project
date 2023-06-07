@@ -26,13 +26,14 @@ class CNN1(nn.Module):
         return x
 
 
+# LeNet5 architecture
 class LeNet5(nn.Module):
     def __init__(self, device, dataset_name="CIFAR10", in_channels=1):
         super(LeNet5, self).__init__()
 
         self.device = device
 
-        self.features = nn.Sequential(  # TODO: ensure input is 32x32
+        self.features = nn.Sequential(
             nn.Conv2d(in_channels, 6, kernel_size=5).to(device),
             nn.ReLU(),
             nn.AvgPool2d(kernel_size=2, stride=2),
@@ -109,7 +110,7 @@ class ResNet50(nn.Module):
         self.input_size = input_size
         self.device = device
 
-        self.model = nn.Sequential(  # TODO: verify input format
+        self.model = nn.Sequential(
             nn.Conv2d(in_channels, 64, kernel_size=7, stride=2, padding=3).to(device),
             nn.BatchNorm2d(64),
             nn.ReLU(inplace=True),
@@ -136,6 +137,7 @@ class ResNet50(nn.Module):
         return self.model(x)
 
 
+# AlexNet architecture
 class AlexNet(nn.Module):
     def __init__(self, device, dataset_name="CIFAR10", in_channels=3, num_classes=1000):
         super(AlexNet, self).__init__()
@@ -143,7 +145,7 @@ class AlexNet(nn.Module):
         self.device = device
 
         if dataset_name == "CIFAR10":
-            self.features = nn.Sequential(  # TODO: input is RGB 32x32
+            self.features = nn.Sequential(
                 nn.Conv2d(in_channels, 64, kernel_size=3, stride=1, padding=2).to(
                     device
                 ),
@@ -162,7 +164,7 @@ class AlexNet(nn.Module):
             )
             self.linear_input_size = 256 * 4 * 4
         elif dataset_name == "ImageNet":
-            self.features = nn.Sequential(  # TODO: input is RGB 227x227
+            self.features = nn.Sequential(
                 nn.Conv2d(in_channels, 96, kernel_size=11, stride=4, padding=0).to(
                     device
                 ),
@@ -208,9 +210,7 @@ class AlexNet(nn.Module):
 # VGGNet architecture
 class VGGNet(nn.Module):
     def __init__(self, device, in_channels=3, num_classes=1000, num_layers=16):
-        super(
-            VGGNet, self
-        ).__init__()  # in_channels: 3 for RGB or 1 for greyscale, TODO: expect shape [batch_size, 1, height, width]
+        super(VGGNet, self).__init__()
 
         self.in_channels = in_channels
         self.device = device
@@ -269,7 +269,7 @@ class VGGNet(nn.Module):
 
         self.features = self._make_layers(device, cfg)
 
-        self.classifier = nn.Sequential(  # TODO: RGB, verify how to handle size
+        self.classifier = nn.Sequential(
             nn.Linear(512 * 1 * 1, 4096).to(device),
             nn.ReLU(inplace=True),
             nn.Dropout(),
@@ -303,6 +303,7 @@ class VGGNet(nn.Module):
         return nn.Sequential(*layers)
 
 
+# LeNet++ architecture
 class LeNetPlusPlus(nn.Module):
     def __init__(self, device, in_channels=1, num_classes=10):
         super(LeNetPlusPlus, self).__init__()
@@ -338,13 +339,14 @@ class LeNetPlusPlus(nn.Module):
         return x
 
 
+# MiniVGG architecture
 class MiniVGG(nn.Module):
     def __init__(self, device, in_channels=3, num_classes=10):
         super(MiniVGG, self).__init__()
 
         self.device = device
 
-        self.features = nn.Sequential(  # in_channels: 3 for RGB or 1 for greyscale, TODO: expect shape [batch_size, 1, height, width]
+        self.features = nn.Sequential(
             nn.Conv2d(in_channels, 32, kernel_size=3, padding=1).to(device),
             nn.ReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2),
