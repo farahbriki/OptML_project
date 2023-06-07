@@ -41,9 +41,9 @@ class LeNet5(nn.Module):
             nn.AvgPool2d(kernel_size=2, stride=2),
         )
 
-        if dataset_name == 'MNIST':
+        if dataset_name == "MNIST":
             linear_input_size = 16 * 4 * 4
-        elif dataset_name == 'CIFAR10':
+        elif dataset_name == "CIFAR10":
             linear_input_size = 16 * 5 * 5
 
         self.classifier = nn.Sequential(
@@ -270,7 +270,7 @@ class VGGNet(nn.Module):
         self.features = self._make_layers(device, cfg)
 
         self.classifier = nn.Sequential(  # TODO: RGB, verify how to handle size
-            nn.Linear(512 * 7 * 7, 4096).to(device),
+            nn.Linear(512 * 1 * 1, 4096).to(device),
             nn.ReLU(inplace=True),
             nn.Dropout(),
             nn.Linear(4096, 4096).to(device),
@@ -301,7 +301,7 @@ class VGGNet(nn.Module):
                 in_channels_ = v
 
         return nn.Sequential(*layers)
-    
+
 
 class LeNetPlusPlus(nn.Module):
     def __init__(self, device, in_channels=1, num_classes=10):
@@ -336,7 +336,6 @@ class LeNetPlusPlus(nn.Module):
         x = x.view(x.size(0), -1)
         x = self.classifier(x)
         return x
-
 
 
 class MiniVGG(nn.Module):
