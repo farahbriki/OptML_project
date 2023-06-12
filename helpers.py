@@ -205,7 +205,7 @@ def build_optimizer(optimizer_type,network):
         case 'AdaGrad':
             optimizer = optim.Adagrad(network.parameters(),lr = hyperparameters[optimizer_type]['learning_rate'])
         case 'AdaDelta':
-            optimizer = optim.Adadelta(network.parameters(),lr = hyperparameters[optimizer_type]['learning_rate'], weight_decay = hyperparameters[optimizer_type]['decay'])
+            optimizer = optim.Adadelta(network.parameters(),lr = hyperparameters[optimizer_type]['learning_rate'], rho = hyperparameters[optimizer_type]['decay'])
         case 'AdaMax':
             optimizer = optim.Adamax(network.parameters(),lr = hyperparameters[optimizer_type]['learning_rate'], betas = hyperparameters[optimizer_type]['betas'])
         case 'RMSProp':
