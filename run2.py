@@ -2,8 +2,7 @@ import os
 import pickle
 from helpers2 import *
 Models = {
-    "MNIST": ["LeNet5", "LeNetPlusPlus", "MiniVGG"],
-    "CIFAR10": ["ResNet50", "VGGNet", "AlexNet"],
+    "CIFAR10": ["VGGNet", "VGGNet", "AlexNet"],
 }
 Optimizers = [
     "SGD",
