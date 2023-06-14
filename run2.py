@@ -2,7 +2,7 @@ import os
 import pickle
 from helpers2 import *
 Models = {
-    "CIFAR10": ["VGGNet", "VGGNet", "AlexNet"],
+    "CIFAR10": ["VGGNet", "ResNet50", "AlexNet"],
 }
 Optimizers = [
     "SGD",
