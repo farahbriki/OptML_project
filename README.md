@@ -8,7 +8,7 @@ In this project, we evaluate different optimization methods in Deep Learning.
 ## Requirements 
 
 This project requires the following to run :
-* Python ( version => 3.10 )
+* Python ( version >= 3.10 )
 * PyTorch
 * tqdm
 
