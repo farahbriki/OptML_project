@@ -52,9 +52,8 @@ The code is split into the following:
 *  [helpers.py](helpers.py) : contains the functions that load the dataset, build the networks and optimizers,train the model and test it.Results are stored in the [result](/result) folder and the models are stored in the [models](/models) folder.
 * [networks.py](networks.py): contains the classe definitions of the networks used in the project.
 * [run.py](run.py): contains the code used to train 
-* [results.ipynb](results.ipynb) : a notebook that loads the results and showcases the differents plots and tables used in the report.
-
-
+* [results.ipynb](results.ipynb) : a notebook that loads the results and showcases the differents plots and tables used in the report.  
+    To be able to run this notebook, please download the models from [here](https://drive.google.com/drive/folders/1FYesdnDPinI_i6BBdGi8VXckft8xe-I6?usp=sharing).
 
 
 
